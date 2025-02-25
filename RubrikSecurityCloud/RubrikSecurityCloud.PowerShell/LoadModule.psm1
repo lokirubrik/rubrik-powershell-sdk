@@ -5,12 +5,11 @@ try {
     # Record the user's current working directory so that we can return to it when we 
     # are done loading the module
     $currentPath = Get-Location
+    $moduleDir = Join-Path -Path $PSScriptRoot -ChildPath "netstandard2.0"
 
     # Determine the module directory based on the PowerShell edition
     If ($PSVersionTable.PSEdition -eq "Desktop") {
-       # Write-Host "`nLoading Rubrik Security Cloud PowerShell Module (WindowsPowerShell)...`n"
-        $moduleDir = Join-Path -Path $PSScriptRoot -ChildPath "net461"
-
+        # Write-Host "`nLoading Rubrik Security Cloud PowerShell Module (WindowsPowerShell)...`n"
         # Load the specific versions of required assemblies
         $unsafeAssemblyPath = Join-Path -Path $moduleDir -ChildPath 'System.Runtime.CompilerServices.Unsafe.dll'
         $vectorsAssemblyPath = Join-Path -Path $moduleDir -ChildPath 'System.Numerics.Vectors.dll'
@@ -43,10 +42,6 @@ try {
 
         # Register the event handler
         [System.AppDomain]::CurrentDomain.add_AssemblyResolve($onAssemblyResolve)
-    }
-    else {
-      # Write-Host "`nLoading Rubrik Security Cloud PowerShell Module (PowerShell Core)...`n"
-        $moduleDir = Join-Path -Path $PSScriptRoot -ChildPath "net6.0"
     }
 
     # Change to the directory containing the module

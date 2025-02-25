@@ -1,19 +1,19 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net6.0;net461</TargetFrameworks>
+    <TargetFramework>netstandard2.0</TargetFramework>
     <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
     <OutputType>Library</OutputType>
     <AutoGenerateBindingRedirects>True</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\net6.0\RubrikSecurityCloud.PowerShell.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netstandard2.0\RubrikSecurityCloud.PowerShell.xml</DocumentationFile>
     <LangVersion>10.0</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\net6.0\RubrikSecurityCloud.PowerShell.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\netstandard2.0\RubrikSecurityCloud.PowerShell.xml</DocumentationFile>
     <LangVersion>10.0</LangVersion>
   </PropertyGroup>
   <ItemGroup>
@@ -70,39 +70,39 @@
     <PackageReference Include="PowerShellStandard.Library" Version="5.1.1" />
   </ItemGroup>
 
-  <Target Name="CopyModules" AfterTargets="Build" Condition="'$(TargetFramework)' == 'net6.0'">
+  <Target Name="CopyModules" AfterTargets="Build" Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <ItemGroup>
       <ModuleFiles Include="$(ProjectDir)/Public/*" />
     </ItemGroup>
     <Copy SourceFiles="@(ModuleFiles)" DestinationFolder="$(TargetDir)/../Public" />
   </Target>
 
-  <Target Name="CopyToolkitPublicFiles" AfterTargets="Build" Condition="'$(TargetFramework)' == 'net6.0'">
+  <Target Name="CopyToolkitPublicFiles" AfterTargets="Build" Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <ItemGroup>
       <ToolkitPublicFiles Include="$(ProjectDir)/../../Toolkit/Public/*" />
     </ItemGroup>
     <Copy SourceFiles="@(ToolkitPublicFiles)" DestinationFolder="$(TargetDir)/../Toolkit/Public" />
   </Target>
 
-  <Target Name="CopyToolkitPrivateFiles" AfterTargets="Build" Condition="'$(TargetFramework)' == 'net6.0'">
+  <Target Name="CopyToolkitPrivateFiles" AfterTargets="Build" Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <ItemGroup>
       <ToolkitPrivateFiles Include="$(ProjectDir)/../../Toolkit/Private/*" />
     </ItemGroup>
     <Copy SourceFiles="@(ToolkitPrivateFiles)" DestinationFolder="$(TargetDir)/../Toolkit/Private" />
   </Target>
 
-  <Target Name="CopyToolkitFormatFiles" AfterTargets="Build" Condition="'$(TargetFramework)' == 'net6.0'">
+  <Target Name="CopyToolkitFormatFiles" AfterTargets="Build" Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <ItemGroup>
       <ToolkitFormatFiles Include="$(ProjectDir)/../../Toolkit/Format/*" />
     </ItemGroup>
     <Copy SourceFiles="@(ToolkitFormatFiles)" DestinationFolder="$(TargetDir)/../Toolkit/Format" />
   </Target>
 
-  <Target Name="GeneratePSD1File" AfterTargets="Build" Condition="'$(TargetFramework)' == 'net6.0'">
+  <Target Name="GeneratePSD1File" AfterTargets="Build" Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <Exec Command="pwsh -File $(ProjectDir)/UpdatePsd1.ps1" />
   </Target>
 
-  <Target Name="CopySupportFiles" AfterTargets="Build" Condition="'$(TargetFramework)' == 'net6.0'">
+  <Target Name="CopySupportFiles" AfterTargets="Build" Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <!---Copy Module files -->
     <ItemGroup>
       <ModuleSupportFiles Include="$(ProjectDir)/RubrikSecurityCloud.psd1" />
@@ -125,7 +125,7 @@
     <Copy SourceFiles="@(DetailOperationFiles)" DestinationFolder="$(TargetDir)/../Toolkit/Operations/DETAIL" />
   </Target>
 
-  <Target Name="GeneratePSDocs" AfterTargets="Build" Condition="'$(TargetFramework)' == 'net6.0' AND '$(GeneratePSDocs)'=='true'">
+  <Target Name="GeneratePSDocs" AfterTargets="Build" Condition="'$(TargetFramework)' == 'netstandard2.0' AND '$(GeneratePSDocs)'=='true'">
     <Message Text="############ GENERATING POWERSHELL HELP DOCUMENTATION ############" Importance="High" />
     <Exec Command="pwsh -File $(ProjectDir)docs/GenerateDocs.ps1 -sourceXml $(TargetDir)RubrikSecurityCloud.PowerShell.xml -ModuleFilePath $(TargetDir)../RubrikSecurityCloud.psd1 -ModuleName RubrikSecurityCloud -OutputPath $(TargetDir)" />
   </Target>

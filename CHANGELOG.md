@@ -593,7 +593,7 @@ Deprecations:
 Breaking Changes:
 
 - Assemblies are no longer installed at the root of the output
-  directory, but instead in a platform subdirectory: `net472` or `net6.0`
+  directory, but instead in a platform subdirectory: `net472` or `netstandard2.0`
 
 ## Version 0.11-beta
 
